@@ -48,6 +48,19 @@ let timer;
 
 document.getElementById("start").addEventListener("click", startQuiz);
 
+document.getElementById("play-again").addEventListener("click", function() {
+    // Reset necessary variables
+    currentQuestion = 0;
+    score = 0;
+    time = 60;
+
+    // Hide end-container and show initial screen
+    document.getElementById("end-container").hidden = true;
+    document.getElementById("start").hidden = false;
+    document.getElementById("description").hidden = false;
+    document.getElementById("play-again").hidden = true;
+});
+
 function startQuiz() {
     document.getElementById("start").hidden = true;
     document.getElementById("description").hidden = true;
@@ -94,6 +107,9 @@ function endQuiz() {
     document.getElementById("end-container").hidden = false;
     document.getElementById("score").innerText = score;
     document.getElementById("save").addEventListener("click", saveScore);
+
+    // Display the "Play Again" button
+    document.getElementById("play-again").hidden = false;
 }
 
 function saveScore() {
