@@ -49,12 +49,9 @@ let timer;
 document.getElementById("start").addEventListener("click", startQuiz);
 
 document.getElementById("play-again").addEventListener("click", function() {
-    // Reset necessary variables
     currentQuestion = 0;
     score = 0;
     time = 60;
-
-    // Hide end-container and show initial screen
     document.getElementById("end-container").hidden = true;
     document.getElementById("start").hidden = false;
     document.getElementById("description").hidden = false;
@@ -65,12 +62,10 @@ function startQuiz() {
     document.getElementById("start").hidden = true;
     document.getElementById("description").hidden = true;
     document.getElementById("question-container").hidden = false;
-
     timer = setInterval(function() {
         time--;
         if (time <= 0) endQuiz();
     }, 1000);
-
     showQuestion();
 }
 
@@ -79,13 +74,10 @@ function showQuestion() {
         endQuiz();
         return;
     }
-
     let q = questions[currentQuestion];
     document.getElementById("question").innerText = q.question;
-
     let answers = document.getElementById("answers");
     answers.innerHTML = "";
-
     q.answers.forEach((answer, i) => {
         let li = document.createElement("li");
         let btn = document.createElement("button");
@@ -106,10 +98,10 @@ function endQuiz() {
     document.getElementById("question-container").hidden = true;
     document.getElementById("end-container").hidden = false;
     document.getElementById("score").innerText = score;
-    document.getElementById("save").addEventListener("click", saveScore);
-
-    // Display the "Play Again" button
-    document.getElementById("play-again").hidden = false;
+    document.getElementById("save").addEventListener("click", function() {
+        saveScore();
+        document.getElementById("play-again").hidden = false; // Display the Play Again button after saving score
+    });
 }
 
 function saveScore() {
